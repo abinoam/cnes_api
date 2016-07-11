@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  cnes_code: MyString
+  ibge_code: MyString
+  company_name: MyString
+  fantasy_name: MyString
+
+two:
+  cnes_code: MyString
+  ibge_code: MyString
+  company_name: MyString
+  fantasy_name: MyString
