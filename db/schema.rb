@@ -11,7 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160711172952) do
+ActiveRecord::Schema.define(version: 20160711193616) do
+
+  create_table "administratives", force: :cascade do |t|
+    t.string   "kind"
+    t.integer  "health_care_establishment_id"
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+  end
 
   create_table "coordinates", force: :cascade do |t|
     t.float    "latitude"
@@ -35,7 +42,17 @@ ActiveRecord::Schema.define(version: 20160711172952) do
     t.string   "email"
     t.string   "fax"
     t.string   "phone"
+    t.string   "cnpj"
   end
+
+  create_table "health_unities", force: :cascade do |t|
+    t.text     "description"
+    t.integer  "health_care_establishment_id"
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+  end
+
+  add_index "health_unities", ["health_care_establishment_id"], name: "index_health_unities_on_health_care_establishment_id"
 
   create_table "locations", force: :cascade do |t|
     t.string   "county"
@@ -53,12 +70,28 @@ ActiveRecord::Schema.define(version: 20160711172952) do
 
   add_index "locations", ["health_care_establishment_id"], name: "index_locations_on_health_care_establishment_id"
 
+  create_table "organization_kinds", force: :cascade do |t|
+    t.string   "kind"
+    t.integer  "health_care_establishment_id"
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+  end
+
+  add_index "organization_kinds", ["health_care_establishment_id"], name: "index_organization_kinds_on_health_care_establishment_id"
+
   create_table "sponsors", force: :cascade do |t|
     t.string   "cnpj"
     t.string   "name"
     t.integer  "HealthCareEstablishment_id"
     t.datetime "created_at",                 null: false
     t.datetime "updated_at",                 null: false
+  end
+
+  create_table "teaching_activities", force: :cascade do |t|
+    t.string   "activity"
+    t.integer  "health_care_establishment_id"
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
   end
 
 end
