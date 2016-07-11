@@ -11,22 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160711061517) do
+ActiveRecord::Schema.define(version: 20160711172952) do
 
-  create_table "addresses", force: :cascade do |t|
-    t.string   "county"
-    t.string   "state",                      limit: 2
-    t.string   "region"
-    t.string   "zipcode"
-    t.string   "district"
-    t.string   "street"
-    t.string   "street_number"
-    t.integer  "HealthCareEstablishment_id"
-    t.datetime "created_at",                           null: false
-    t.datetime "updated_at",                           null: false
+  create_table "coordinates", force: :cascade do |t|
+    t.float    "latitude"
+    t.float    "longitude"
+    t.string   "origin"
+    t.string   "last_update"
+    t.integer  "location_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
-  add_index "addresses", ["HealthCareEstablishment_id"], name: "index_addresses_on_HealthCareEstablishment_id"
+  add_index "coordinates", ["location_id"], name: "index_coordinates_on_location_id"
 
   create_table "health_care_establishments", force: :cascade do |t|
     t.string   "cnes_code"
@@ -35,18 +32,26 @@ ActiveRecord::Schema.define(version: 20160711061517) do
     t.string   "fantasy_name"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
+    t.string   "email"
+    t.string   "fax"
+    t.string   "phone"
   end
 
   create_table "locations", force: :cascade do |t|
-    t.float    "latitude"
-    t.float    "longitude"
-    t.string   "origin"
-    t.integer  "Address_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string   "county"
+    t.string   "state",                        limit: 2
+    t.string   "region"
+    t.string   "zipcode"
+    t.string   "district"
+    t.string   "street"
+    t.string   "street_number"
+    t.string   "complement"
+    t.integer  "health_care_establishment_id"
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
   end
 
-  add_index "locations", ["Address_id"], name: "index_locations_on_Address_id"
+  add_index "locations", ["health_care_establishment_id"], name: "index_locations_on_health_care_establishment_id"
 
   create_table "sponsors", force: :cascade do |t|
     t.string   "cnpj"
