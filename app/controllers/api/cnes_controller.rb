@@ -5,7 +5,7 @@ class Api::CnesController < ApplicationController
 
   def index
 
-    render json: readHealthCareEstablishments.first(10), include: json_options
+    render json: readHealthCareEstablishments.first(7), include: json_options
 
   end
 
