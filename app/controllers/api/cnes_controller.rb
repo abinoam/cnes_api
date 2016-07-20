@@ -9,7 +9,7 @@ class Api::CnesController < ApplicationController
     if limit.nil?
       list = HealthCareEstablishment.all
     else
-      list = HealthCareEstablishment.first(limit)
+      list = HealthCareEstablishment.take(limit)
     end
 
     render json: list, include: json_options
