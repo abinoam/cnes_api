@@ -4,7 +4,15 @@ class Api::CnesController < ApplicationController
   JSON_FILE = 'public/estabelecimentos.json'
 
   def index
-    render json: HealthCareEstablishment.first(100), include: json_options
+    limit = params[:limit]
+
+    if limit.nil?
+      list = HealthCareEstablishment.all
+    else
+      list = HealthCareEstablishment.first(limit)
+    end
+
+    render json: list, include: json_options
   end
 
   def setup
