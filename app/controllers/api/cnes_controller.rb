@@ -4,7 +4,7 @@ class Api::CnesController < ApplicationController
   JSON_FILE = 'public/estabelecimentos.json'
 
   def index
-    render json: HealthCareEstablishment.first(40), include: json_options
+    render json: HealthCareEstablishment.first(100), include: json_options
   end
 
   def setup
