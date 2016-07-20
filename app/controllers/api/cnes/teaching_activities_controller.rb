@@ -4,7 +4,7 @@ class Api::Cnes::TeachingActivitiesController < ApplicationController
   # GET /api/cnes/teaching_activities
   # GET /api/cnes/teaching_activities.json
   def index
-    @teaching_activities = TeachingActivity.all
+    render json: TeachingActivity.all
   end
 
   # GET /api/cnes/teaching_activities/1
