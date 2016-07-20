@@ -5,6 +5,10 @@ class CreateHealthCareEstablishments < ActiveRecord::Migration
       t.string :ibge_code
       t.string :company_name
       t.string :fantasy_name
+      t.references :teaching_activity
+      t.references :organization_kind
+      t.references :health_unity
+      t.references :administrative
 
       t.timestamps null: false
     end

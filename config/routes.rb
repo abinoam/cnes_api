@@ -1,6 +1,21 @@
 Rails.application.routes.draw do
+
   namespace :api do
-  get 'cnes/index'
+  namespace :cnes do
+    get 'administratives/index'
+    end
+  end
+
+  namespace :api do
+  namespace :cnes do
+    get 'health_unities/index'
+    end
+  end
+
+  namespace :api do
+  namespace :cnes do
+    get 'organization_kinds/index'
+    end
   end
 
   # The priority is based upon order of creation: first created -> highest priority.
@@ -61,5 +76,13 @@ Rails.application.routes.draw do
   # rota para api do CNES
   namespace :api do
     resources :cnes, only: [:index]
+    get '/cnes/setup', to: 'cnes#setup'
+
+    namespace :cnes do
+      resources :teaching_activities
+      resources :organization_kinds, only: [:index]
+      resources :health_unities, only: [:index]
+      resources :administratives, only: [:index]
+    end
   end
 end
