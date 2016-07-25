@@ -20,4 +20,18 @@ class HealthCareEstablishment < ActiveRecord::Base
 
   }
 
+  scope :byName, lambda { |name|
+    where("lower(company_name) LIKE '%#{name.downcase}%' " +
+            "OR lower(fantasy_name) LIKE '%#{name.downcase}%'") unless name.blank?
+
+  }
+
+  scope :filter_administrative, lambda { |codes|
+      joins(:administrative).where("administratives.id IN (?)", codes) unless codes.blank?
+  }
+
+  scope :filter_health_unities, lambda { |codes|
+    joins(:health_unity).where("health_unities.code IN (?)", codes) unless codes.blank?
+  }
+
 end

@@ -99,23 +99,16 @@ class Api::CnesController < ApplicationController
   # Retorna os estabelecimetnos de acordo com um nome passado
   #
   def establishments
-    render json: establishmentsByName(params[:name]), include: json_options
-    
+    health_care_establishments = HealthCareEstablishment.byName(params[:name])
+                                  .filter_administrative(params[:administratives])
+                                  .filter_health_unities(params[:health_unities])
+    # render plain: params
+    render json: health_care_establishments, include: json_options
+
   end
 
   private
 
-
-    ##
-    # Lê todos os estabelecimentos de hospitais que parecem com um nome dado
-    #
-    ##
-    def establishmentsByName(name)
-      HealthCareEstablishment
-          .where("lower(company_name) LIKE '%#{name.downcase}%' " +
-                  "OR lower(fantasy_name) LIKE '%#{name.downcase}%'")
-
-    end
     # Lê os dados em JSON de um arquivo
     #
     ##

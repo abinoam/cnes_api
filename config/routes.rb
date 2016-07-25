@@ -79,7 +79,7 @@ Rails.application.routes.draw do
     get '/cnes/setup', to: 'cnes#setup'
 
     get '/cnes/near', to: 'cnes#near'
-    get '/cnes/establishments/:name', to: 'cnes#establishments'
+    get '/cnes/establishments', to: 'cnes#establishments'
 
 
     namespace :cnes do
