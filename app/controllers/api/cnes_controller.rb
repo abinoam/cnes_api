@@ -76,8 +76,46 @@ class Api::CnesController < ApplicationController
 
   end
 
+  ##
+  # Retorna os estabelecimentos de hospitais mais próximos
+  #
+  def near
+    latitude = params[:latitude].to_i
+    longitude = params[:longitude].to_i
+    radius = params[:radius].to_i
+
+    interval = radius.to_i / 100000
+    latMax = latitude + interval
+    latMin = latitude - interval
+    longMax = longitude + interval
+    longtMin = longitude - interval
+
+    list = HealthCareEstablishment.al
+
+    render json: list
+  end
+
+  ##
+  # Retorna os estabelecimetnos de acordo com um nome passado
+  #
+  def establishments
+    render json: establishmentsByName(params[:name]), include: json_options
+    
+  end
+
   private
+
+
     ##
+    # Lê todos os estabelecimentos de hospitais que parecem com um nome dado
+    #
+    ##
+    def establishmentsByName(name)
+      HealthCareEstablishment
+          .where("lower(company_name) LIKE '%#{name.downcase}%' " +
+                  "OR lower(fantasy_name) LIKE '%#{name.downcase}%'")
+
+    end
     # Lê os dados em JSON de um arquivo
     #
     ##

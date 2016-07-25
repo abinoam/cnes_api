@@ -78,11 +78,16 @@ Rails.application.routes.draw do
     resources :cnes, only: [:index]
     get '/cnes/setup', to: 'cnes#setup'
 
+    get '/cnes/near', to: 'cnes#near'
+    get '/cnes/establishments/:name', to: 'cnes#establishments'
+
+
     namespace :cnes do
       resources :teaching_activities
       resources :organization_kinds, only: [:index]
       resources :health_unities, only: [:index]
       resources :administratives, only: [:index]
+
     end
   end
 end
