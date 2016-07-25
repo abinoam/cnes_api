@@ -27,7 +27,7 @@ class HealthCareEstablishment < ActiveRecord::Base
   }
 
   scope :filter_administrative, lambda { |codes|
-      joins(:administrative).where("administratives.id IN (?)", codes) unless codes.blank?
+      joins(:administrative).where("administratives.code IN (?)", codes) unless codes.blank?
   }
 
   scope :filter_health_unities, lambda { |codes|
